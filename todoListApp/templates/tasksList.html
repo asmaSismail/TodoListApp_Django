@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+{% load static %}
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="{% static 'taskList.css' %}">
+
+  <!-- Bootstrap 4 JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+  </head>
+
+<body >
+    {% if user.is_authenticated %}
+   <div class="container">
+    <div class="row ">
+      
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex flex-column align-items-center text-center">
+                <img src="{% static 'userLogo' %}" alt="Admin" class="rounded-circle" width="150">
+                <div class="mt-3">
+                  <h4>{{user.username}}</h4>
+                  <p class="text-secondary mb-1">{{user.email}}</p>
+                  <a class="primary" href="{% url 'users:logout' %}">SignOut <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card-hover-shadow-2x mb-3 card">
+            <div class="card-header-tab card-header">
+              <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+                <i class="fa fa-tasks"></i>
+                &nbsp; Tasks
+             </div>
+                  
+            </div>
+            <div class="scroll-area-sm">
+              <perfect-scrollbar class="ps-show-limits">
+                <div style="position: static;" class="ps ps--active-y">
+                  <div class="ps-content">
+                    <ul class=" list-group list-group-flush">
+                    {% for task in tasks %}
+                      <li class="list-group-item">
+                        <div class="todo-indicator bg-warning"></div>
+                        <div class="widget-content p-0">
+                          <div class="widget-content-wrapper">
+                            <div class="widget-content-left mr-2">
+                            
+                            </div>
+                            <div class="widget-content-left">
+                              <div class="widget-heading">{{task.date}} | {{task.title}}  
+                              <div class="badge  {% if task.status == 'processed' %}badge-danger{% else %}badge-success{% endif %}  ml-2">
+                                {{task.status}}</div>
+                          
+                              </div>
+                              <div class="widget-subheading"><i>
+                                {{ task.description }}
+                              </i></div>
+                             
+                            </div>
+                          <div class="widget-content-right">
+                            <a class="border-0 btn-transition  success " href="{% url 'todoListApp:Task_update' pk=task.pk %}">
+                              <i class="fa fa-pencil"></i></a>
+                              <a class="border-0 btn-transition danger" href="{% url 'todoListApp:Task_delete' pk=task.pk %}">
+                             <i class="fa fa-trash"></i>
+                              </a>
+                          </div>
+                          </div>
+                        </div>
+                      </li>
+                      {% endfor %}  
+                    </ul>
+                  </div>
+                  
+                </div>
+              </perfect-scrollbar>
+            </div>
+            <div class="card-footer" id="footer">
+                <a class="primary " href="{% url 'todoListApp:Task_New' %}">Add <i class="fa fa-plus"></i></a>
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter">Filter <i class="fa fa-filter"></i></button>
+               
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Filter Options</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <form method="GET">
+                        <div class="card-body">
+                          <div class="row">
+                             <label for="status">STATUS</label><br>
+                                <select class="form-control" id="status"  name="status">
+                                  <option value="*" selected>Tout</option>
+                                  <option name="status" value="done">DONE</option>
+                                  <option name="status" value="processed">PROCESSED</option>
+                                </select>  
+                          </div>
+                          <br>
+                           <div class="row">
+                             <label for="date">DATE</label><br>
+                             <input type="date" id="date" name="date" class="form-control" >
+                           </div> 
+                        </div>
+                         <div class="modal-footer">
+                        
+                          <button type="submit" class="btn btn-primary">Filter</button>
+                         </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>  
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+     {% endif %}
+</body>
+</html>
