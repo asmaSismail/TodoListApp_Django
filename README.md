@@ -1,8 +1,8 @@
 
 <div align="center">
-    <img src="./Demo/login.png" alt="Application Image" width="300" />
+    <img src="./Demo/login.png" alt="Application Image" width="500" />
 </div>
-```markdown
+
 # Django Todo List Application
 
 ## Features
