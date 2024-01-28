@@ -1,3 +1,4 @@
+![Application Image](./Demo/login.png)
 ```markdown
 # Django Todo List Application
 
