@@ -34,3 +34,4 @@
    - Visit http://127.0.0.1:8000/ in your browser.
 
 ## Screenshots
+![Application Image](./Demo/register.png)  ![Application Image](./Demo/homePage.png)
