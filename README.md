@@ -35,7 +35,9 @@
 
 ## Screenshots
 **Registration Page**
-![Application Image](./Demo/register.png)  
+
+     ![Application Image](./Demo/register.png)  
 
 **Home Page**
-![Application Image](./Demo/homePage.png)
+
+       ![Application Image](./Demo/homePage.png)
