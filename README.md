@@ -1,4 +1,7 @@
-![Application Image](./Demo/login.png)
+
+<div align="center">
+    <img src="./Demo/login.png" alt="Application Image" width="300" />
+</div>
 ```markdown
 # Django Todo List Application
 
